@@ -1,11 +1,8 @@
 use crate::seal_data::*;
 use crate::system::{ServState, WorkerProp};
 use crate::types::WebPieceInfo;
-use actix_web::web::{Data, Json, Payload};
-use actix_web::{Error, HttpRequest, HttpResponse};
 use bytes::BytesMut;
 use filecoin_proofs_api::{seal, PieceInfo};
-use futures_util::StreamExt;
 use log::{error, trace};
 use serde_json::json;
 use std::fs::OpenOptions;
@@ -13,7 +10,6 @@ use std::io;
 use std::path::Path;
 use std::sync::mpsc::channel;
 use std::sync::{Arc, Mutex};
-use std::thread::{self, JoinHandle};
 
 pub async fn clear_cache(_req: HttpRequest, data: Json<ClearCacheData>) -> HttpResponse {
     trace!("clear_cache");
